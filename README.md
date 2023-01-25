@@ -1,13 +1,28 @@
-# Exercise-07-Multiplexer-and-De-multiplexer
-### AIM: To implement 4 X1 multiplexer and 1X4 de multiplexer using verilog and validate its outputs
-### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   Quartus prime
-### THEORY 
+Developed by: 
 
-## What are Multiplexer and Demultiplexer?
+
+RegisterNumber:  
+
+
+
+AIM: To implement 4 X1 multiplexer and 1X4 de multiplexer using verilog and validate its outputs
+
+
+HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
+
+
+SOFTWARE REQUIRED:   Quartus prime
+
+
+THEORY 
+
+What are Multiplexer and Demultiplexer?
+
 In-network transmission, both the multiplexer and demultiplexer are combinational circuits. A multiplexer selects an input from several inputs then it is transmitted in the form of a single line. An alternative name of the multiplexer is MUX or data selector. A demultiplexer uses one input signal and generates many. So it is known as Demux or data distributor.
 
-## What is a Multiplexer?
+
+What is a Multiplexer?
+
 The multiplexer is a device that has multiple inputs and single line output. The select lines determine which input is connected to the output, and also increase the amount of data that can be sent over a network within a certain time. It is also called a data selector.
 
 The single-pole multi-position switch is a simple example of a non-electronic circuit of the multiplexer, and it is widely used in many electronic circuits. The multiplexer is used to perform high-speed switching and is constructed by electronic components.
@@ -26,16 +41,21 @@ Figure2 4X1 multiplexer
 If the control input is changed to 11, then all gates are restricted except the bottom AND gate. In this case, D3 is transmitted to the output, and q=D0. If the control input is changed to AB =11, all gates are disabled except the bottom AND gate. In this case, D3 is transmitted to the output, and q = D3. The best example of a 4X1 multiplexer is IC 74153. In this IC, the o/p is the same as the i/p. Another example of a 4X1 multiplexer is IC 45352. In this IC, the o/p is the compliment of the i/p
 
 
-## What is Demultiplexer?
+What is Demultiplexer?
+
 De-multiplexer is also a device with one input and multiple output lines. It is used to send a signal to one of the many devices. The main difference between a multiplexer and a de-multiplexer is that a multiplexer takes two or more signals and encodes them on a wire, whereas a de-multiplexer does reverse to what the multiplexer does.
+
 ![image](https://user-images.githubusercontent.com/36288975/170912606-a30e4b74-1726-4430-b245-2c3c3d9c232d.png)
 Figure 3 De-multiplexer 
+
 1-4 Demultiplexer
+
 The 1-to-4 demultiplexer comprises 1- input bit, 4-output bits, and control bits. The 1X4 demultiplexer circuit diagram is shown below.![image](https://user-images.githubusercontent.com/36288975/170912683-00fb746a-1d45-4023-91d1-3a70b841073c.png)
 
 ![image](https://user-images.githubusercontent.com/36288975/170912741-7cbd52af-7e0d-4be3-b5c6-6fb9c4eca7c9.png)
 
 Figure4 1X4 De-multiplexer 
+
 The i/p bit is considered as Data D. This data bit is transmitted to the data bit of the o/p lines, which depends on the AB value and the control i/p.
 
 When the control i/p AB = 01, the upper second AND gate is permitted while the remaining AND gates are restricted. Thus, only data bit D is transmitted to the output, and Y1 = Data.
@@ -45,44 +65,132 @@ If the data bit D is low, the output Y1 is low. IF data bit D is high, the outpu
 If the control input changes to AB = 10, then all the gates are restricted except the third AND gate from the top. Then, data bit D is transmitted only to the output Y2; and, Y2 = Data. . The best example of 1X4 demultiplexer is IC 74155.
 
  
- 
-### Procedure
-/* write all the steps invloved */
+Procedure
+
+
+Start the module using module projname().
+
+Declare the inputs and outputs along with the select lines according to the multiplexer and demultiplexer.
+
+Use wire to assign intermediate outputs.
+
+Use and, or and not gates to get the desired output.
+
+End the module.
+
+Generate RTL realization and timing diagrams.
+
+PROGRAM
+
+Program for flipflops and verify its truth table in quartus using Verilog programming.
+
+1x4 Multiplexer:
+
+module mux(I0,I1,I2,I3,S0,S1,Y);
+
+input I0,I1,I2,I3,S0,S1;
+
+output Y;
+
+wire S0C,S1C;
+
+not (S0C,S0);
+
+not (S1C,S1);
+
+wire P,Q,R,S;
+
+and (P,S0C,S1C,I0);
+
+and (Q,S0C,S1,I1);
+
+and (R,S0,S1C,I2);
+
+and (S,S0,S1,I3);
+
+or (Y,P,Q,R,S);
+
+endmodule
+
+4x1 Demultiplexer:
+
+module demux(Y0,Y1,Y2,Y3,S0,S1,I);
+
+input S0,S1,I;
+
+output Y0,Y1,Y2,Y3;
+
+wire S0C,S1C;
+
+nor (S0C,S0);
+
+nor (S1C,S1);
+
+and (Y0,I,S0C,S1C);
+
+and (Y1,I,S0C,S1);
+
+and (Y2,I,S0,S1C);
+
+and (Y3,I,S0,S1);
+
+endmodule
 
 
 
-### PROGRAM 
-/*
-Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
-*/
+RTL LOGIC
+
+1x4 Multiplexer:
+
+![Screenshot (81)](https://user-images.githubusercontent.com/123484740/214640490-32103ce6-4bdc-4ac2-9d64-6c9d754f6345.png)
+
+
+4x1 Demultiplexer:
 
 
 
+![Screenshot (82)](https://user-images.githubusercontent.com/123484740/214640626-56ea59e5-4a21-4037-9995-5bccf52ebf32.png)
 
 
 
-### RTL LOGIC  
+TIMING DIGRAMS
+
+1x4 Multiplexer:
 
 
 
+![Screenshot (83)](https://user-images.githubusercontent.com/123484740/214640703-a86101f4-116a-40a2-8312-01bf0b456838.png)
+
+
+![Screenshot (84)](https://user-images.githubusercontent.com/123484740/214640744-0850a494-b106-4285-87a3-d76d5cb700f1.png)
+
+
+![Screenshot (86)](https://user-images.githubusercontent.com/123484740/214640804-e7c2a762-66d1-45d0-b066-056993201740.png)
+
+
+![Screenshot (87)](https://user-images.githubusercontent.com/123484740/214640944-591c74bb-0999-460a-9f18-190d00bbd7f3.png)
 
 
 
+4x1 Demultiplexer:
+
+![Screenshot (88)](https://user-images.githubusercontent.com/123484740/214641057-88f0884d-a5d2-48f9-a159-b3e8f28f720d.png)
 
 
-### TIMING DIGRAMS  
+TRUTH TABLE
+
+1x4 Multiplexer:
+
+
+![Screenshot (89)](https://user-images.githubusercontent.com/123484740/214641173-c6a71c84-22d3-4016-999c-6c40677bcb60.png)
+
+4x1 Demultiplexer:
+
+
+![Screenshot (90)](https://user-images.githubusercontent.com/123484740/214641259-576ae0ff-b9aa-4ade-a102-d35837e6b293.png)
 
 
 
+RESULTS
 
-
-### TRUTH TABLE 
-
-
-
-
-
-
-### RESULTS 
+Hence, 4x1 Multiplexer and 1x4 Demultiplexer is been implemented and verified using verilog programming and its output are validated.
